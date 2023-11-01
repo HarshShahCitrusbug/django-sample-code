@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8" />
+    <!-- Responsive Start-->
+    <meta content="initial-scale=1.0, user-scalable=no, maximum-scale=1, width=device-width" name="viewport" />
+    <meta name="keywords" content="your, keywords, here" />
+    <meta name="description"
+        content="Lorem ipsum dolor sit amet, consectetuer adipiscing laoreet dolore magna aliquam erat volutpat." />
+    <!-- Responsive End -->
+    <title>Index | Embermail</title>
+    <link rel="shortcut icon" href="{% static 'images/M-logo.svg' %}" type="image/x-icon" />
+    <!-- CSS Files-->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'DM-Sans-fonts/stylesheet.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+    <!-- CSS Files End -->
+</head>
+
+<body class="d-flex flex-column h-100">
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Top menu section start -->
+            <header class="header top-header">
+                <nav class="navbar navbar-expand-md navbar-dark">
+                    <div class="container">
+                        <div class="header-logo">
+                            <a class="navbar-brand smoth-scroll" href="{% url 'index' %}">
+                                <img src="{% static 'images/logo.png' %}" class="logo-img" alt="logo-img" />
+                            </a>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarScroll">
+                            <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll nav-menu ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="#howitworks">How it works</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#pricing">Pricing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{% url 'users:contact' %}">Contact</a>
+                                </li>
+                                <li class="nav-item get-started-link">
+                                    <a class="nav-link btn" href="{% url 'users:onboarding' %}">Get Started</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Top menu section ended  -->
+            <!-- Home page content start -->
+            <div id="wrapper" class="page-content home-page-content">
+                <!-- Banner section start -->
+                <section class="banner-section">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="banner-img">
+                                    <img src="{% static 'images/banner-img.png' %}" alt="banner-img" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="banner-content">
+                                    <span>Master Your Email Delivery</span>
+                                    <h1>
+                                        Hotter Leads,<br />
+                                        Warmer Inbox
+                                    </h1>
+                                    <p>
+                                        Transform cold emails into blazing successes with
+                                        EmberMails warming prowess.
+                                    </p>
+                                    <p>Ignite engagement, conquer deliverability.</p>
+                                    <a href="{% url 'users:onboarding' %}" class="btn start-warmup-link">Start Warming Up your email</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Banner section ended -->
+                <!-- why we stand out section start -->
+                <section class="why-we-stand-section section-padding">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-8">
+                                <div class="why-we-stand-content-wrapper">
+                                    <h2>Why We Stand Out.</h2>
+                                    <p>
+                                        At Embermail.AI, we offer a unique and game-changing
+                                        solution for email deliverability. Our hybrid system
+                                        seamlessly merges curated and user-generated inboxes,
+                                        powered by the reliability of IMAP. This approach sets us
+                                        apart, but it's our unwavering commitment to your email
+                                        success that truly shines.
+                                    </p>
+                                    <p>
+                                        We've developed a comprehensive and forward-thinking
+                                        strategy that leaves no stone unturned. By harnessing the
+                                        strengths of curated and user-generated inboxes, we ensure
+                                        genuine engagement and maximum results. With our
+                                        cutting-edge use of IMAP, you can say goodbye to
+                                        unreliable email-warming methods and embrace a robust and
+                                        stable platform. We guarantee that your emails
+                                        consistently reach their intended recipients, leaving no
+                                        room for missed opportunities or wasted efforts.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4">
+                                <div class="why-we-stand-image-wrapper">
+                                    <img src="{% static 'images/why-we-stand.png' %}" alt="why-we-stand-img" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- why we stand out section ended -->
+                <!-- email warming section start -->
+                <section class="email-warming-section section-padding">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-5">
+                                <div class="email-warming-img-wrapper">
+                                    <img src="{% static 'images/email-warming.png' %}" alt="email-warming-img" />
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-md-7">
+                                <div class="email-warming-content-wrapper">
+                                    <h2>
+                                        Email Warming <br />
+                                        Tools.
+                                    </h2>
+                                    <p>
+                                        Email warming tools are essential software services that
+                                        improve email deliverability by preventing emails from
+                                        being marked as spam and ensuring they reach the
+                                        recipient's primary inbox. By gradually increasing
+                                        campaign volume from new or flagged accounts, these tools
+                                        maximize email success. At Embermail.AI, we combine our
+                                        expertise in cold email with cutting-edge technology to
+                                        ensure your emails reach their targets with maximum
+                                        impact. Experience the difference with our all-in-one
+                                        solutions for successful cold outreach.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- email warming section ended -->
+
+                <!-- how it work section start -->
+                <section class="how-it-work-section section-padding" id="howitworks">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6">
+                                <div class="how-it-work-content-wrapper">
+                                    <h2>How Embermail.ai Works.</h2>
+                                    <p>
+                                        We have crafted a solution that blends expertise and
+                                        cutting-edge technology, ensuring your emails reach their
+                                        targets with maximum impact.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-6">
+                                <div class="how-it-work-image-wrapper">
+                                    <img src="{% static 'images/how-it-work.png' %}" alt="why-we-stand-img" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- how it work section ended -->
+
+                <!-- pricing section start -->
+                <section class="pricing-section section-padding" id="pricing">
+                    <div class="container">
+                        <div class="pricing-section-title text-center">
+                            <h2 class="mb-2">Pricing & Licensing.</h2>
+                            <p>
+                                EmberMail.ai offers a flexible, tiered pricing structure
+                                depending on the time commitment:
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="pricing-block-wrapper">
+                                    <div class="pricing-content">
+                                        <h6>Starter</h6>
+                                        <h3>$40</h3>
+                                        <p><b>month per inbox </b></p>
+                                        <p>Billed every month</p>
+                                        <p>Cancel anytime</p>
+                                    </div>
+                                    <a href="{% url 'users:onboarding' %}" class="get-now-btn btn">Get started now</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="pricing-block-wrapper">
+                                    <div class="pricing-content">
+                                        <h6>Advanced</h6>
+                                        <h3>$35</h3>
+                                        <p><b>month per inbox </b></p>
+                                        <p>Billed every month</p>
+                                        <p>Cancel anytime</p>
+                                    </div>
+                                    <a href="{% url 'users:onboarding' %}" class="get-now-btn btn">Get started now</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="pricing-block-wrapper">
+                                    <div class="pricing-content">
+                                        <h6>Pro</h6>
+                                        <h3>
+                                            $20
+                                            <span> Save 50% </span>
+                                        </h3>
+
+                                        <p><b>month per inbox </b></p>
+                                        <p>Billed every month</p>
+                                        <p>Cancel anytime</p>
+                                    </div>
+                                    <a href="{% url 'users:onboarding' %}" class="get-now-btn btn">Get started now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- pricing section ended -->
+
+                <!-- About section start -->
+                <section class="about-section section-padding" id="about">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="about-content text-center">
+                                    <span>About</span>
+                                    <h2>We're A Results Driven Team</h2>
+                                    <p>
+                                        Ready to take your business operations to the next level?
+                                        Contact us today to schedule a demo and learn more about
+                                        how embermail can help you streamline your operations,
+                                        increase efficiency.
+                                    </p>
+                                    <div class="button-group">
+                                        <ul>
+                                            <li>
+                                                <a href="{% url 'users:contact' %}" class="btn">Contact Us</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'users:onboarding' %}" class="btn">Get Started</a>
+                                            </li>
+                                        </ul>
+                                        <div class="about-img">
+                                            <img src="{% static 'images/about-bg.png' %}" alt="about-img" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- About section ended -->
+
+                <!-- Data security & privacy section start -->
+                <section class="privacy-section section-padding">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="privacy-left-content-wrapper">
+                                    <h2>Data Security & <br />Privacy.</h2>
+                                    <p>
+                                        We understand the importance of addressing concerns
+                                        related to data protection and compliance, as transparency
+                                        in this area is essential for building trust and
+                                        confidence among our potential users. Here are the steps
+                                        we've taken to ensure robust data security measures and
+                                        compliance with relevant regulations:
+                                    </p>
+                                    <img src="{% static 'images/lock.png' %}" alt="" />
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="privacy-right-content-wrapper row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="secure-type-wrapper">
+                                            <img src="{% static 'images/lock.svg' %}" alt="secure-img" />
+                                            <h4>Advanced encryption.</h4>
+                                            <p>
+                                                We use industry-standard encryption to keep your data
+                                                secure, both during transit and at rest, protecting
+                                                sensitive information from unauthorized access.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="secure-type-wrapper">
+                                            <img src="{% static 'images/fingerprint.svg' %}" alt="secure-img" />
+                                            <h4>Access controls & authentication.</h4>
+                                            <p>
+                                                Stringent access controls and multi-factor
+                                                authentication ensure authorized personnel have
+                                                exclusive data access, strengthening security and
+                                                preventing unauthorized account access.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="secure-type-wrapper">
+                                            <img src="{% static 'images/secure.svg' %}" alt="secure-img" />
+                                            <h4>Secure infrastructure.</h4>
+                                            <p>
+                                                Our software operates on a highly secure
+                                                infrastructure with advanced technologies, ensuring a
+                                                resilient and reliable system with multiple layers of
+                                                protection.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="secure-type-wrapper">
+                                            <img src="{% static 'images/key.svg' %}" alt="secure-img" />
+                                            <h4>Compliance with regulations.</h4>
+                                            <p>
+                                                Embermail.AI complies with GDPR and ensures data is
+                                                handled to the highest standards, giving users peace
+                                                of mind.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--Data security & privacy section ended -->
+
+                <!-- integration section start -->
+                <section class="integration-section section-padding">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="integration-content-left-wrapper">
+                                    <h2>Integrations.</h2>
+                                    <p>
+                                        Here's how leveraging our software alongside other tools
+                                        can drive efficiency and productivity to new heights:
+                                    </p>
+                                    <a href="{% url 'users:onboarding' %}" class="btn get-started-btn">Get Started</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="integration-content-right-wrapper row">
+                                    <div class="col-lg-6 col-xl-5 col-md-6 col-sm-6">
+                                        <div class="integration-block-wrapper">
+                                            <img src="{% static 'images/cloud.svg' %}" alt="integration-img" />
+                                            <h6>Streamlined Data Exchange</h6>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-5 col-md-6 col-sm-6">
+                                        <div class="integration-block-wrapper">
+                                            <img src="{% static 'images/crm.svg' %}" alt="integration-img" />
+                                            <h6>Interoperability with CRM and Sales Tools</h6>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- integration section ended -->
+
+                <!-- footer section start -->
+                <footer class="footer-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="footer-content-wrapper">
+                                    <div class="footer-logo">
+                                        <img src="{% static 'images/M-logo.png' %}" alt="m-logo" />
+                                    </div>
+                                    <div class="footer-content-right-wrapper">
+                                        <h4>
+                                            Round-the-clock <br />
+                                            Customer Support.
+                                        </h4>
+                                        <p>
+                                            At EmberMail.ai, we are committed to providing the best
+                                            customer service. Our 24/7 customer support is available
+                                            via chat, ready to assist with any queries or issues.
+                                        </p>
+                                        <ul class="contact-list">
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <img src="{% static 'images/phone-icon.svg' %}" alt="phone-icon" />
+                                                    +972 53 472 0882</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <img src="{% static 'images/mail-icon.svg' %}" alt="mail-icon" />
+                                                    hello@embermail.ai</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="social-links">
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <img src="{% static 'images/mingcute_facebook-line.svg' %}"
+                                                        alt="social-icon" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <img src="{% static 'images/ri_twitter-line.svg' %}" alt="social-icon" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <img src="{% static 'images/ri_linkedin-fill.svg' %}" alt="social-icon" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <img src="{% static 'images/ri_instagram-line.svg' %}" alt="social-icon" />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="footer-emoji">
+                                    <img src="{% static 'images/footer-emoji.png' %}" alt="emoji-img" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="copyright-text">
+                            <p>© 2023 embermail.ai All right reserved.</p>
+                        </div>
+                    </div>
+                </footer>
+                <!-- footer section ended -->
+            </div>
+            <!-- Home page content ended -->
+        </div>
+    </div>
+    <!-- Js Files start -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/wow.js' %}"></script>
+    <!-- Js Files ended -->
+</body>
+
+</html>

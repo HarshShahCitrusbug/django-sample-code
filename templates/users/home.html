@@ -1,0 +1,1348 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Home {% endblock title %}
+{% block content %}
+<!-- page content section start -->
+<div class="em_inner_area has-settings-main-wrapper">
+    <div class="em_inner_content">
+        <div class="settings-main-wrapper">
+            <h1>Dashboard</h1>
+            <!-- top row section start -->
+            {% if user.is_master_user %}
+            <div class="top-row">
+                <div class="dropdown custom-dropdown">
+                    <input type="checkbox" class="dropdown__switch" id="filter-switch" hidden/>
+                    <label for="filter-switch" class="dropdown__options-filter">
+                        <ul class="dropdown__filter m-0 bg-white" role="listbox" tabindex="-1">
+                            <li class="dropdown__filter-selected" aria-selected="true">
+                                All Inbox
+                            </li>
+                            <li>
+                                <ul class="dropdown__select">
+                                    <li class="dropdown__select-option" role="option">
+                                        ashish@mail.com
+                                    </li>
+                                    <li class="dropdown__select-option" role="option">
+                                        vicky@mail.com
+                                    </li>
+                                    <li class="dropdown__select-option" role="option">
+                                        jayendra@mail.com
+                                    </li>
+                                    <li class="dropdown__select-option" role="option">
+                                        Ben@mail.com
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </label>
+                </div>
+                <div class="btn-row mt-0">
+                    <a href="{% url 'campaigns:select_provider' %}?selected_flow=inbox" class="btn add-inbox-btn">Add Inbox</a>
+                    <a href="{% url 'campaigns:select_provider' %}?selected_flow=invite" class="invite-people-btn">Invite People</a>
+                </div>
+            </div>
+            {% endif %}
+            <!-- top row section ended -->
+            <!-- dashboard tabs section start -->
+            <div class="setting-tab-section">
+                <!-- dashboard tabs list start -->
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-week-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-week" type="button" role="tab"
+                                aria-controls="pills-week" aria-selected="true">
+                            Week
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-two-weeks-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-two-weeks" type="button" role="tab"
+                                aria-controls="pills-two-weeks" aria-selected="false">
+                            Two Weeks
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-month-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-month" type="button" role="tab"
+                                aria-controls="pills-month" aria-selected="false">
+                            Month
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-quarter-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-quarter" type="button" role="tab"
+                                aria-controls="pills-quarter" aria-selected="false">
+                            Quarter
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-custom-date-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-custom-date" type="button" role="tab"
+                                aria-controls="pills-custom-date" aria-selected="false">
+                            Custom Date
+                        </button>
+                    </li>
+                </ul>
+                <!-- dashboard tabs list ended -->
+                <!-- dashboard tabs content start -->
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-week" role="tabpanel"
+                         aria-labelledby="pills-week-tab">
+                        <div class="main-tab-content-wrapper ds-tab-content-wrapper">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-title-wrapper w-100">
+                                        <h2>Title</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot gray"></span>
+                                                <h4>Email sent</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="row title-chart-wrapper">
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/gray-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/green-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/red-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/yellow-chart.png' %}" alt=""/>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            Every large design company whether it’s a
+                                            multi-national branding corporation or a regular
+                                            down at heel tatty magazine publisher needs to
+                                            fill holes in the workforce.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-reputation-wrapper w-100">
+                                        <h2>Reputation</h2>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="reputation-left-wrapper">
+                                                    <div class="reputation-chart-wrapper">
+                                                        <img src="{% static '/images/reputation-chart.png' %}"
+                                                             alt=""/>
+                                                    </div>
+                                                    <ul class="title-dashboard-list mb-0">
+                                                        <li>
+                                                            <span class="dot green"></span>
+                                                            <h4>Reputation</h4>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="reputation-right-wrapper">
+                                                    <h2 class="mb-2">By Provider</h2>
+                                                    <p>
+                                                        Every large design company <br/>
+                                                        whether it’s a multi-national.
+                                                    </p>
+
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Google
+                                                            <span class="yellow-text">+10%</span>
+                                                        </h4>
+                                                        <div class="progress google-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 75%" aria-valuenow="75"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Outlook
+                                                            <span class="red-text">+16%</span>
+                                                        </h4>
+                                                        <div class="progress outlook-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 60%" aria-valuenow="60"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-progress-wrapper w-100">
+                                        <h2>Progress</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="progress-chart-div">
+                                            <img src="{% static '/images/progress-chart.png' %}" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12 d-flex flex-column">
+                                    <div class="row inbox-status-wrapper">
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Running</h5>
+                                                    <a href="javascript:;"
+                                                       class="btn pause-btn">Pause</a>
+                                                </div>
+                                                <span class="dot green"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Paused</h5>
+                                                    <a href="javascript:;" class="btn pause-btn">Start
+                                                        Warmup</a>
+                                                </div>
+                                                <span class="dot gray"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox Running</p>
+                                                <h5>12</h5>
+                                                <span class="green-text">+5%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox paused</p>
+                                                <h5>43</h5>
+                                                <span class="red-text">+84%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Lowest Score Index</p>
+                                                <h5>32</h5>
+                                                <span class="purple-text">+45%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Highest Score Index</p>
+                                                <h5>13</h5>
+                                                <span class="yellow-text">+99%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="tab-block-wrapper ds-health-wrapper w-100 h-100 d-flex flex-column">
+                                        <h2 class="mb-2">Inbox health check</h2>
+                                        <p>Comets are a big source of meteoroids.</p>
+                                        <ul class="inbox-health-wrapper-list">
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">SPF</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">Domain Blacklist</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">DMARC</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">MX Records</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                                    <span class="col-md-4 ps-0">Warmup Days
+                                                                    </span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-two-weeks" role="tabpanel"
+                         aria-labelledby="pills-two-weeks-tab">
+                        <div class="main-tab-content-wrapper ds-tab-content-wrapper">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-title-wrapper w-100">
+                                        <h2>Title</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot gray"></span>
+                                                <h4>Email sent</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="row title-chart-wrapper">
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/gray-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/green-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/red-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/yellow-chart.png' %}" alt=""/>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            Every large design company whether it’s a
+                                            multi-national branding corporation or a regular
+                                            down at heel tatty magazine publisher needs to
+                                            fill holes in the workforce.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-reputation-wrapper w-100">
+                                        <h2>Reputation</h2>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="reputation-left-wrapper">
+                                                    <div class="reputation-chart-wrapper">
+                                                        <img src="{% static '/images/reputation-chart.png' %}"
+                                                             alt=""/>
+                                                    </div>
+                                                    <ul class="title-dashboard-list mb-0">
+                                                        <li>
+                                                            <span class="dot green"></span>
+                                                            <h4>Reputation</h4>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="reputation-right-wrapper">
+                                                    <h2 class="mb-2">By Provider</h2>
+                                                    <p>
+                                                        Every large design company <br/>
+                                                        whether it’s a multi-national.
+                                                    </p>
+
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Google
+                                                            <span class="yellow-text">+10%</span>
+                                                        </h4>
+                                                        <div class="progress google-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 75%" aria-valuenow="75"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Outlook
+                                                            <span class="red-text">+16%</span>
+                                                        </h4>
+                                                        <div class="progress outlook-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 60%" aria-valuenow="60"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-progress-wrapper w-100">
+                                        <h2>Progress</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="progress-chart-div">
+                                            <img src="{% static '/images/progress-chart.png' %}" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12 d-flex flex-column">
+                                    <div class="row inbox-status-wrapper">
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Running</h5>
+                                                    <a href="javascript:;"
+                                                       class="btn pause-btn">Pause</a>
+                                                </div>
+                                                <span class="dot green"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Paused</h5>
+                                                    <a href="javascript:;" class="btn pause-btn">Start
+                                                        Warmup</a>
+                                                </div>
+                                                <span class="dot gray"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox Running</p>
+                                                <h5>12</h5>
+                                                <span class="green-text">+5%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox paused</p>
+                                                <h5>43</h5>
+                                                <span class="red-text">+84%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Lowest Score Index</p>
+                                                <h5>32</h5>
+                                                <span class="purple-text">+45%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Highest Score Index</p>
+                                                <h5>13</h5>
+                                                <span class="yellow-text">+99%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="tab-block-wrapper ds-health-wrapper w-100 h-100 d-flex flex-column">
+                                        <h2 class="mb-2">Inbox health check</h2>
+                                        <p>Comets are a big source of meteoroids.</p>
+                                        <ul class="inbox-health-wrapper-list">
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">SPF</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">Domain Blacklist</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">DMARC</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">MX Records</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                                    <span class="col-md-4 ps-0">Warmup Days
+                                                                    </span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-month" role="tabpanel"
+                         aria-labelledby="pills-month-tab">
+                        <div class="main-tab-content-wrapper ds-tab-content-wrapper">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-title-wrapper w-100">
+                                        <h2>Title</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot gray"></span>
+                                                <h4>Email sent</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="row title-chart-wrapper">
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/gray-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/green-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/red-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/yellow-chart.png' %}" alt=""/>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            Every large design company whether it’s a
+                                            multi-national branding corporation or a regular
+                                            down at heel tatty magazine publisher needs to
+                                            fill holes in the workforce.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-reputation-wrapper w-100">
+                                        <h2>Reputation</h2>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="reputation-left-wrapper">
+                                                    <div class="reputation-chart-wrapper">
+                                                        <img src="{% static '/images/reputation-chart.png' %}"
+                                                             alt=""/>
+                                                    </div>
+                                                    <ul class="title-dashboard-list mb-0">
+                                                        <li>
+                                                            <span class="dot green"></span>
+                                                            <h4>Reputation</h4>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="reputation-right-wrapper">
+                                                    <h2 class="mb-2">By Provider</h2>
+                                                    <p>
+                                                        Every large design company <br/>
+                                                        whether it’s a multi-national.
+                                                    </p>
+
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Google
+                                                            <span class="yellow-text">+10%</span>
+                                                        </h4>
+                                                        <div class="progress google-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 75%" aria-valuenow="75"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Outlook
+                                                            <span class="red-text">+16%</span>
+                                                        </h4>
+                                                        <div class="progress outlook-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 60%" aria-valuenow="60"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-progress-wrapper w-100">
+                                        <h2>Progress</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="progress-chart-div">
+                                            <img src="{% static '/images/progress-chart.png' %}" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12 d-flex flex-column">
+                                    <div class="row inbox-status-wrapper">
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Running</h5>
+                                                    <a href="javascript:;"
+                                                       class="btn pause-btn">Pause</a>
+                                                </div>
+                                                <span class="dot green"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Paused</h5>
+                                                    <a href="javascript:;" class="btn pause-btn">Start
+                                                        Warmup</a>
+                                                </div>
+                                                <span class="dot gray"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox Running</p>
+                                                <h5>12</h5>
+                                                <span class="green-text">+5%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox paused</p>
+                                                <h5>43</h5>
+                                                <span class="red-text">+84%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Lowest Score Index</p>
+                                                <h5>32</h5>
+                                                <span class="purple-text">+45%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Highest Score Index</p>
+                                                <h5>13</h5>
+                                                <span class="yellow-text">+99%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="tab-block-wrapper ds-health-wrapper w-100 h-100 d-flex flex-column">
+                                        <h2 class="mb-2">Inbox health check</h2>
+                                        <p>Comets are a big source of meteoroids.</p>
+                                        <ul class="inbox-health-wrapper-list">
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">SPF</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">Domain Blacklist</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">DMARC</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">MX Records</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                                    <span class="col-md-4 ps-0">Warmup Days
+                                                                    </span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-quarter" role="tabpanel"
+                         aria-labelledby="pills-quarter-tab">
+                        <div class="main-tab-content-wrapper ds-tab-content-wrapper">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-title-wrapper w-100">
+                                        <h2>Title</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot gray"></span>
+                                                <h4>Email sent</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="row title-chart-wrapper">
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/gray-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/green-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/red-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/yellow-chart.png' %}" alt=""/>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            Every large design company whether it’s a
+                                            multi-national branding corporation or a regular
+                                            down at heel tatty magazine publisher needs to
+                                            fill holes in the workforce.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-reputation-wrapper w-100">
+                                        <h2>Reputation</h2>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="reputation-left-wrapper">
+                                                    <div class="reputation-chart-wrapper">
+                                                        <img src="{5 static '/images/reputation-chart.png' %}"
+                                                             alt=""/>
+                                                    </div>
+                                                    <ul class="title-dashboard-list mb-0">
+                                                        <li>
+                                                            <span class="dot green"></span>
+                                                            <h4>Reputation</h4>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="reputation-right-wrapper">
+                                                    <h2 class="mb-2">By Provider</h2>
+                                                    <p>
+                                                        Every large design company <br/>
+                                                        whether it’s a multi-national.
+                                                    </p>
+
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Google
+                                                            <span class="yellow-text">+10%</span>
+                                                        </h4>
+                                                        <div class="progress google-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 75%" aria-valuenow="75"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Outlook
+                                                            <span class="red-text">+16%</span>
+                                                        </h4>
+                                                        <div class="progress outlook-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 60%" aria-valuenow="60"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-progress-wrapper w-100">
+                                        <h2>Progress</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="progress-chart-div">
+                                            <img src="{% static '/images/progress-chart.png' %}" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12 d-flex flex-column">
+                                    <div class="row inbox-status-wrapper">
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Running</h5>
+                                                    <a href="javascript:;"
+                                                       class="btn pause-btn">Pause</a>
+                                                </div>
+                                                <span class="dot green"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Paused</h5>
+                                                    <a href="javascript:;" class="btn pause-btn">Start
+                                                        Warmup</a>
+                                                </div>
+                                                <span class="dot gray"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox Running</p>
+                                                <h5>12</h5>
+                                                <span class="green-text">+5%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox paused</p>
+                                                <h5>43</h5>
+                                                <span class="red-text">+84%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Lowest Score Index</p>
+                                                <h5>32</h5>
+                                                <span class="purple-text">+45%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Highest Score Index</p>
+                                                <h5>13</h5>
+                                                <span class="yellow-text">+99%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="tab-block-wrapper ds-health-wrapper w-100 h-100 d-flex flex-column">
+                                        <h2 class="mb-2">Inbox health check</h2>
+                                        <p>Comets are a big source of meteoroids.</p>
+                                        <ul class="inbox-health-wrapper-list">
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">SPF</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">Domain Blacklist</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">DMARC</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">MX Records</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                                    <span class="col-md-4 ps-0">Warmup Days
+                                                                    </span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-custom-date" role="tabpanel"
+                         aria-labelledby="pills-custom-date-tab">
+                        <div class="main-tab-content-wrapper ds-tab-content-wrapper">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-title-wrapper w-100">
+                                        <h2>Title</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot gray"></span>
+                                                <h4>Email sent</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="row title-chart-wrapper">
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/gray-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/green-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/red-chart.png' %}" alt=""/>
+                                            </div>
+                                            <div
+                                                    class="col-xl-3 col-lg-6 col-md-3 col-6 title-chart-div">
+                                                <img src="{% static '/images/yellow-chart.png' %}" alt=""/>
+                                            </div>
+                                        </div>
+                                        <p>
+                                            Every large design company whether it’s a
+                                            multi-national branding corporation or a regular
+                                            down at heel tatty magazine publisher needs to
+                                            fill holes in the workforce.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-reputation-wrapper w-100">
+                                        <h2>Reputation</h2>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="reputation-left-wrapper">
+                                                    <div class="reputation-chart-wrapper">
+                                                        <img src="{% static '/images/reputation-chart.png' %}"
+                                                             alt=""/>
+                                                    </div>
+                                                    <ul class="title-dashboard-list mb-0">
+                                                        <li>
+                                                            <span class="dot green"></span>
+                                                            <h4>Reputation</h4>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="reputation-right-wrapper">
+                                                    <h2 class="mb-2">By Provider</h2>
+                                                    <p>
+                                                        Every large design company <br/>
+                                                        whether it’s a multi-national.
+                                                    </p>
+
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Google
+                                                            <span class="yellow-text">+10%</span>
+                                                        </h4>
+                                                        <div class="progress google-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 75%" aria-valuenow="75"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="progress-wrapper">
+                                                        <h4>
+                                                            Outlook
+                                                            <span class="red-text">+16%</span>
+                                                        </h4>
+                                                        <div class="progress outlook-progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: 60%" aria-valuenow="60"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-12 d-flex">
+                                    <div class="tab-block-wrapper ds-progress-wrapper w-100">
+                                        <h2>Progress</h2>
+                                        <ul class="title-dashboard-list">
+                                            <li>
+                                                <span class="dot green"></span>
+                                                <h4>Inbox</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot red"></span>
+                                                <h4>Spam</h4>
+                                            </li>
+                                            <li>
+                                                <span class="dot yellow"></span>
+                                                <h4>Category</h4>
+                                            </li>
+                                        </ul>
+                                        <div class="progress-chart-div">
+                                            <img src="{% static '/images/progress-chart.png' %}" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-12 d-flex flex-column">
+                                    <div class="row inbox-status-wrapper">
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Running</h5>
+                                                    <a href="javascript:;"
+                                                       class="btn pause-btn">Pause</a>
+                                                </div>
+                                                <span class="dot green"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12 d-none">
+                                            <div
+                                                    class="inbox-status-block running-status-wrapper tab-block-wrapper">
+                                                <p>Inbox Status</p>
+                                                <div class="inbox-running-content">
+                                                    <h5>Paused</h5>
+                                                    <a href="javascript:;" class="btn pause-btn">Start
+                                                        Warmup</a>
+                                                </div>
+                                                <span class="dot gray"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox Running</p>
+                                                <h5>12</h5>
+                                                <span class="green-text">+5%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Inbox paused</p>
+                                                <h5>43</h5>
+                                                <span class="red-text">+84%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Lowest Score Index</p>
+                                                <h5>32</h5>
+                                                <span class="purple-text">+45%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6">
+                                            <div class="inbox-status-block tab-block-wrapper">
+                                                <p>Highest Score Index</p>
+                                                <h5>13</h5>
+                                                <span class="yellow-text">+99%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="tab-block-wrapper ds-health-wrapper w-100 h-100 d-flex flex-column">
+                                        <h2 class="mb-2">Inbox health check</h2>
+                                        <p>Comets are a big source of meteoroids.</p>
+                                        <ul class="inbox-health-wrapper-list">
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">SPF</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">Domain Blacklist</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">DMARC</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                    <span class="col-md-4 ps-0">MX Records</span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                        class="inbox-health-list-item align-items-center row mx-0">
+                                                                    <span class="col-md-4 ps-0">Warmup Days
+                                                                    </span>
+                                                    <div class="progress col-md-8 p-0">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             style="width: 40%" aria-valuenow="40"
+                                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- dashboard tabs content ended -->
+            </div>
+            <!-- dashboard tabs section ended-->
+        </div>
+    </div>
+    <!-- page header title section ended -->
+</div>
+{% endblock content %}

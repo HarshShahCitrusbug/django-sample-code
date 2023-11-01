@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Campaign List {% endblock title %}
+
+{% block content %}
+<!-- page content section start -->
+<div class="em_inner_area has-warmup-main-wrapper">
+    <div class="em_inner_content">
+        <div class="warmup-main-wrapper">
+            <h1>Warmup Inbox</h1>
+            <p>Emails list with plans</p>
+            <!-- search bar start -->
+            {% if user.is_master_user %}
+            <div class="main-search-btn-row">
+                <div class="row search-bar w-100">
+                    <div class="col-xl-5 col-lg-6 col-md-9 align-self-start">
+                        <div class="input-group">
+                            <input class="form-control border-end-0 border bg-custom-white" type="search"
+                                   placeholder="Search by Email, Plan Name" id="campaign_list_search"/>
+                            <span class="input-group-append">
+                        <button class="btn bg-custom-white border-start-0 border-bottom-0 ms-n5" type="button">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-row mt-0">
+                    <a href="{% url 'campaigns:select_provider' %}?selected_flow=inbox" class="btn add-inbox-btn">Add
+                        Inbox</a>
+                    <a href="{% url 'campaigns:select_provider' %}?selected_flow=invite" class="invite-people-btn">Invite
+                        People</a>
+                </div>
+            </div>
+            {% endif %}
+            <!-- search bar ended -->
+            <!-- listing table start -->
+            <div class="warmup-listing-table-wrapper">
+                <div class="table-responsive members-listing-table warmup-listing-table mt-2">
+                    <table class="table w-100 table-borderless custom-table members-table" id="campaign_list_table">
+                        <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Warmup Schedule</th>
+                            <th>Spam</th>
+                            <th>Reputation</th>
+                            <th>Plan</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        {% include 'campaigns/campaign_list_tbody.html' %}
+                    </table>
+                </div>
+            </div>
+            <!-- listing table ended -->
+        </div>
+    </div>
+</div>
+<!-- page header title section ended -->
+
+
+<!-- Campaign info modal start -->
+<div class="modal fade member-info-modal" id="campaign_detail_modal" tabindex="-1"
+     aria-labelledby="campaign_detail_modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered custom-max-width-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="campaign_detail_modalLabel">Warmup Inbox info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="member-info-wrapper">
+                            <img src="{% static '/images/default-user.png' %}" alt="member-photo"/>
+                            <div class="member-info mail-id-text">
+                                <h2 id="modal_email"></h2>
+                                <p id="modal_name"></p>
+                            </div>
+                        </div>
+                        <div class="Schedule-block">
+                            <span>Schedule</span>
+                            <h4>
+                                <span><h4 id="modal_domain_type"></h4></span>
+                                <a href="#" id="schedule_edit_btn">
+                                    <img src="{% static '/images/Edit-feild.svg' %}" alt=""/>
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+
+                        <div class="row">
+                            <div class="col-md-6 col-6 member-info-column">
+                                <h6>Plan</h6>
+                                <p id="modal_plan"></p>
+                            </div>
+                            <div class="col-md-6 col-6 member-info-column">
+                                <h6>Payment</h6>
+                                <p id="modal_payment_amount">$35 <span>Per Month</span></p>
+                            </div>
+                            <div class="col-md-6 col-6 member-info-column mt-5">
+                                <h6>Status</h6>
+                                <p class="active-text" id="modal_status"></p>
+                            </div>
+                            <div class="col-md-6 col-6 member-info-column mt-5">
+                                <h6 id="next_invoice_or_cancelled">Next Invoice</h6>
+                                <p id="modal_next_invoice"></p>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <small class="text-danger d-none" id="cancel_subscription_message"></small>
+            <div class="modal-footer border-0" id="button_div">
+                {% if user.is_master_user %}
+                <button type="button" class="btn discard-btn cancel-subscription-btn" id="cancel_subscription_btn">
+                    Cancel Subscription
+                </button>
+                <button type="button" class="btn save-btn upgrade-btn submit-btn mx-2">
+                    Upgrade
+                </button>
+                <a href="#" class="btn save-btn upgrade-btn submit-btn mx-2 d-none" id="send_invitation_btn" >
+                    Send Invitation
+                </a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Member info modal start -->
+<div class="modal fade member-info-modal" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered custom-max-width-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Member info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="member-info-wrapper">
+                            <img src="{% static '/images/member-photo.png' %}" alt="member-photo"/>
+                            <div class="member-info mail-id-text">
+                                <h2>ashish@mail.com</h2>
+                                <p>Ashish Chavda</p>
+                            </div>
+                        </div>
+                        <div class="Schedule-block">
+                            <span>Schedule</span>
+                            <h4>
+                                Maintain deliverability
+                                <a href="javascript:;">
+                                    <img src="{% static '/images/Edit-feild.svg' %}" alt=""/>
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <div class="col-md-6 col-6 member-info-column">
+                                <h6>Plan</h6>
+                                <p>Advanced</p>
+                            </div>
+                            <div class="col-md-6 col-6 member-info-column">
+                                <h6>Payment</h6>
+                                <p>$35 <span>Per Month</span></p>
+                            </div>
+                            <div class="col-md-6 col-6 member-info-column mt-5">
+                                <h6>Status</h6>
+                                <p class="active-text">Active</p>
+                            </div>
+                            <div class="col-md-6 col-6 member-info-column mt-5">
+                                <h6>Next Invoice</h6>
+                                <p>01 Apr 2023</p>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn discard-btn cancel-subscription-btn">
+                    Cancel Subscription
+                </button>
+                <button type="button" class="btn save-btn upgrade-btn submit-btn">
+                    Upgrade
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Subscription modal -->
+<div class="modal fade edit-field-modal" id="cancel_subscription_modal" tabindex="-1"
+     aria-labelledby="cancel_subscription_modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancel_subscription_modalLabel">
+                    Cancel Subscription
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100">
+                    <div class="mb-3">
+                        <p>Are you sure to cancel subscription?</p>
+                    </div>
+                    <div class="mb-3">
+                        <small class="text-danger">Subscription will be canceled at end of the subscription period.</small>
+                    </div>
+                    <div class="mb-3">
+                        <small>Warmup Email : <span id="fill_email_span"></span></small>
+                    </div>
+                    <span class="error-msg" id="name_modal_error"></span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn submit-btn" id="subscription_modal_back_btn">
+                                Back
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn submit-btn" id="cancel_subscription_modal_btn">
+                                Cancel Subscription
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'js/campaigns/campaign_list.js' %}"></script>
+{% endblock javascript %}

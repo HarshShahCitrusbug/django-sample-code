@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Template List {% endblock title %}
+{% block content %}
+<!-- page content section start -->
+<div class="em_inner_area justify-content-start">
+    <div class="em_inner_content">
+        <div class="templats-wrapper">
+            <div class="template-header">
+                <h1>
+                    <img src="{% static '/images/Icon-3.svg' %}" alt="template-icon"/>
+                    Templates
+                </h1>
+                <a href="#" class="btn add-new-btn" data-bs-toggle="modal" data-bs-target="#add_new_template">Add
+                    new</a>
+            </div>
+            {% if warmup_email_list %}
+            <div class="mb-5 dropdown-main-warmup-list-div">
+                <form class="custom-form w-100">
+                    <div class="dropdown custom-dropdown">
+                        <input type="checkbox" class="dropdown__switch" id="filter-switch"
+                               hidden/>
+                        <label for="filter-switch" class="dropdown__options-filter">
+                            <ul class="dropdown__filter mt-2" role="listbox" tabindex="-1">
+                                <li class="dropdown__filter-selected" aria-selected="true" id="selected_warmup_email" data-campaign_id="{{ warmup_email_list.first.id }}">
+                                    {% if selected_email %}
+                                    {{ selected_email }}
+                                    {% else %}
+                                    {{ warmup_email_list.first.email }}
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    <ul class="dropdown__select pt-0" id="warmup_email_selection">
+                                        {% for warmup_email in warmup_email_list %}
+                                            <div class="warmup-email-list-item warmup_email_list_item" id="{{warmup_email.email}}" data-campaign_id="{{ warmup_email.id }}">
+                                                <div>
+                                                    {% if warmup_email.email_service_provider == 'gmail' %}
+                                                    <img class="warmup-email-selection-icon" src="{% static '/images/Gmail-logo.svg' %}" alt="mail-icon"/>
+                                                    {% else %}
+                                                    <img class="warmup-email-selection-icon" src="{% static '/images/Outlook-logo.svg' %}" alt="mail-icon"/>
+                                                    {% endif %}
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">{{warmup_email.email}}</h6>
+                                                </div>
+                                        </div>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            <div class="templates-list">
+                <ul>
+                    {% for template in template_list %}
+                    {% if template.user_id %}
+                    <li class="template-list-item">
+                        <div class="template-list-wrapper">
+                            <h2 class="cursor-class thread_buttons" id="{{ template.id }}_thread">
+                                {{ template.name }}</h2>
+                            <ul>
+                                <li>
+                                    <div class="form-check form-switch">
+                                        <input
+                                                class="form-check-input active_buttons"
+                                                type="checkbox"
+                                                id="{{ template.id }}_active"
+                                                {% if template.is_selected %} name="Active" checked {% else %}name="Inactive" {% endif %}
+                                        />
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" name="Edit" class="edit_buttons"
+                                       data-name="{{ template.name }}"
+                                       data-subject="{{ template.subject }}" id="{{ template.id }}_edit"
+                                       data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <img src="{% static '/images/edit.svg' %}" name="Edit" alt="edit-icon"/>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" name="Delete" data-name="{{ template.name }}"
+                                       class="delete_buttons"
+                                       id="{{template.id}}_delete">
+                                        <img src="{% static '/images/delete.svg' %}" alt="delete-icon"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="template-list-item">
+                        <div class="template-list-wrapper">
+                            <h2 class="cursor-class thread_buttons" id="{{ template.id }}_thread">{{ template.name }} -
+                                Default</h2>
+                            <ul>
+                                <li>
+                                    <div class="form-check form-switch">
+                                        <input
+                                                class="form-check-input add_default_template_buttons"
+                                                type="checkbox"
+                                                name="Active-Inactive"
+                                                id="{{ template.id }}_active"
+                                        />
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    {% endif %}
+                    <hr class="listing-divider"/>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page header title section ended -->
+
+<!-- Edit Template Modal -->
+<div class="modal fade add-new-sender-email-modal" id="exampleModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Edit Template
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100 modal-form">
+                    <div class="mb-3">
+                        <label for="edit_template_name" class="form-label">Template Name</label>
+                        <input type="text" class="form-control" id="edit_template_name" maxlength="50" placeholder="Template Name"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_template_subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="edit_template_subject" maxlength="50" placeholder="Template Subject"/>
+                    </div>
+                    <span class="error-msg" id="edit_template_error"></span>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn discard-btn" data-bs-dismiss="modal">
+                    Discard
+                </button>
+                <button type="button" class="btn save-btn" id="edit_template_btn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add New Template Modal -->
+<div class="modal fade add-new-sender-email-modal" id="add_new_template" tabindex="-1"
+     aria-labelledby="add_new_templateLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add_new_templateLabel">
+                    Add New Template
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100 modal-form">
+                    <div class="mb-3">
+                        <label for="edit_template_name" class="form-label">Template Name</label>
+                        <input type="text" class="form-control" id="template_name" maxlength="50" placeholder="Template Name"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_template_subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="template_subject" maxlength="50" placeholder="Template Subject"/>
+                    </div>
+                    <span class="error-msg" id="add_template_error"></span>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn discard-btn" data-bs-dismiss="modal">
+                    Discard
+                </button>
+                <button type="button" class="btn save-btn" id="add_template_btn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Template Modal -->
+<div class="modal fade add-new-sender-email-modal" id="delete_template_modal" tabindex="-1"
+     aria-labelledby="delete_template_modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete_template_modalLabel">
+                    Delete Template
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100 modal-form">
+                    <div class="my-3 mb-5">
+                        <h6>Are you sure you want to delete '<span id="template_name_filling"></span>' template?</h6>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn discard-btn" data-bs-dismiss="modal">
+                    Discard
+                </button>
+                <button type="button" class="btn delete-btn mx-3" id="delete_template_btn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %} {% block javascript %}
+<script src="{% static 'js/templates/template_list.js' %}"></script>
+{% endblock javascript %}

@@ -1,0 +1,21 @@
+{% load static %}
+<div id="signup-password-div">
+    <div class="my-3 recognize-info-mail-box">
+        <span>👋</span>
+        <p>We don’t recognize <b id="fill_email">{{ email }}</b>. Would
+            you like to create an account with this email?</p>
+    </div>
+    <div class="mb-0 password-field">
+        <label class="form-label" for="signup_password">Create a password</label>
+        <input class="form-control" id="signup_password" placeholder="Password"
+               type="password"/>
+        <button class="toggle" id="btnToggle" type="button"><i class="fa fa-eye"
+                                                               id="eyeIcon"></i></button>
+    </div>
+    <span class="error-msg p-0 m-0" id="password_error"></span>
+    <span class="error-msg p-0 m-0 d-none" id="strong_password_error">
+        Password should contain at least one digit, lowercase, uppercase, special character and length should be between 8-32.
+    </span>
+    <button class="btn submit-btn mt-4" id="signup_btn" type="button">Continue with email</button>
+    <script src="{% static 'js/users/onboarding_signup.js' %}"></script>
+</div>

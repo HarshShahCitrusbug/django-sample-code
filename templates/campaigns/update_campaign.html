@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Campaign {% endblock title %}
+
+{% block content %}
+<!-- page header title section start -->
+<div class="em_inner_area">
+    <div class="em_inner_content">
+        <div class="connect-gmail-box-wrapper">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="connect-content-left-wrapper">
+                        <div class="connect-title">
+                            <img src="{% static '/images/M-logo.svg' %}" alt="embermail-logo"/>
+                            <h1>Schedule Warmup</h1>
+                        </div>
+                        <h4>
+                            Praesent auctor viverra eleifend. Fusce efficitur ipsum
+                            a risus vehicula.
+                        </h4>
+
+                        <form class="custom-form w-100 mt-3">
+                            <div class="dropdown custom-dropdown">
+                                <input type="checkbox" class="dropdown__switch" id="filter-switch"
+                                       hidden/>
+                                <label for="filter-switch" class="dropdown__options-filter">
+                                    <span>I want to</span>
+                                    <ul class="dropdown__filter mt-2" role="listbox" tabindex="-1">
+                                        <li class="dropdown__filter-selected" aria-selected="true" id="selected_domain_option">
+                                            {{ campaign_types.first.display_name }}
+                                        </li>
+                                        <li>
+                                            <ul class="dropdown__select" id="domain_options">
+                                                {% for campaign_type in campaign_types %}
+                                                <li class="dropdown__select-option" id="{{ campaign_type.name }}"
+                                                    data-max_emails="{{ campaign_type.max_emails_per_day }}"
+                                                    data-step_up="{{ campaign_type.step_up }}"
+                                                    data-name="{{ campaign_type.display_name }}" role="option">
+                                                    {{ campaign_type.display_name }}
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </label>
+                            </div>
+                            <div class="email-per-day-block mt-2">
+                                <h6>Recommended emails</h6>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="max_emails" class="form-label">Emails per day</label>
+                                        <input type="text" class="form-control" id="max_emails" value="{{ campaign_types.first.max_emails_per_day }}"/>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="step_up" class="form-label">Daily Step up</label>
+                                        <input type="text" class="form-control" id="step_up" value="{{ campaign_types.first.step_up }}"/>
+                                    </div>
+                                </div>
+                                <span class="error-msg" id="common_error"></span>
+                            </div>
+
+                            <button id="save_button" class="btn submit-btn" type="button">
+                                Start warm up
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="activate-info-sidebar-wrapper">
+                        <ul class="progress">
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Enable IMAP</p>
+                            </li>
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Security</p>
+                            </li>
+                            {% if not joining_flow %}
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Select Plan</p>
+                            </li>
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Pay</p>
+                            </li>
+                            {% endif %}
+                            <li class="progress__item progress__item--active">
+                                <p class="progress__title">Schedule</p>
+                            </li>
+                        </ul>
+
+                        <div class="message-sent-wrapper">
+                            <img src="{% static '/images/message.svg' %}" alt="mesage-icon"/>
+                            <h6>having trouble?</h6>
+                            <p>
+                                feel free to contact us and we will always help you
+                                through the process
+                            </p>
+                            <a href="{% url 'users:contact' %}" class="btn contactus-btn">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-img">
+        <img src="{% static '/images/Saly-17.png' %}" alt="bottom-emoji"/>
+    </div>
+</div>
+<!-- page header title section ended -->
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'js/campaigns/update_campaign.js' %}"></script>
+{% endblock javascript %}

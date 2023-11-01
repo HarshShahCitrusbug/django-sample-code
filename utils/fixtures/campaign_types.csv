@@ -1,0 +1,5 @@
+name,max_emails_per_day,step_up,starting_mails,display_name
+new_domain,30,2,5,New Domain
+repair,70,4,5,Repair Reputation
+custom,100,5,5,Custom
+maintain_deliverability,50,3,5,Maintain Deliverability

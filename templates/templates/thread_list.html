@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Thread List {% endblock title %}
+{% block content %}
+
+<!-- page header title section start -->
+<h1 class="d-none" id="template_id">{{ template.id }}</h1>
+<div class="em_inner_area justify-content-start">
+    <div class="em_inner_content">
+        <div class="templats-wrapper">
+            <div class="template-header">
+                <h1>{{ template.name }}</h1>
+            </div>
+
+            <div class="templates-list-detail-wrapper-content">
+                <ul>
+                    {% for thread in threads %}
+                    <li class="template-detail-item">
+                        <div class="template-detail-wrapper">
+                            <div class="row">
+                                <div class="col-lg-11 col-md-10">
+                                    <div class="template-detail-content">
+                                        <h2>
+                                            {{ template.subject }}
+                                            <span class="sender-text">{% if thread.thread_ordering_number|divisibleby:2 %}
+                                                Receiver
+                                                {% else %}
+                                                Sender
+                                                {% endif %}
+                                            </span>
+                                        </h2>
+                                        <p>{{ thread.body |safe }}</p>
+                                    </div>
+                                </div>
+                                {% if template.user_id %}
+                                <div class="col-lg-1 col-md-2">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)" class="edit_buttons" data-body="{{ thread.body }}" id="{{ thread.id }}_edit" data-bs-toggle="modal"
+                                               data-bs-target="#edit_thread">
+                                                <img src="{% static '/images/edit.svg' %}" alt="edit-icon"/>
+                                            </a>
+                                        </li>
+                                        {% if forloop.last %}
+                                        <li>
+                                            <a href="javascript:void(0)" class="delete_buttons"
+                                               id="{{ thread.id }}_delete">
+                                                <img src="{% static '/images/delete.svg' %}"
+                                                     alt="delete-icon"/>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% if template.user_id %}
+                <a href="javascript:void(0)" class="btn add-new-btn" data-bs-toggle="modal"
+                   data-bs-target="#add_new_thread">Add New Thread</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page header title section ended -->
+
+<!-- Add Thread Modal -->
+<div class="modal fade add-new-sender-email-modal" id="add_new_thread" tabindex="-1"
+     aria-labelledby="add_new_threadLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add_new_threadLabel">
+                    Add New Thread
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100 modal-form">
+                    <div class="mb-3">
+                        <label for="template_subject" class="form-label">Subject</label>
+                        <div class="form-control" id="template_subject">{{ template.subject }}</div>
+                    </div>
+                    <!-- ck editor start -->
+                    <div class="text-editor-wrapper">
+                        <div id="toolbar-container"></div>
+
+                        <!-- This container will become the editable. -->
+                        <div id="editor">
+                            <p id="thread_body">Content Goes here</p>
+                        </div>
+                    </div>
+                    <!-- ck editor ended -->
+                    <span class="error-msg" id="add_thread_error"></span>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn discard-btn" data-bs-dismiss="modal">
+                    Discard
+                </button>
+                <button type="button" class="btn save-btn" id="add_thread_btn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Thread Modal -->
+<div class="modal fade add-new-sender-email-modal" id="edit_thread" tabindex="-1"
+     aria-labelledby="edit_threadLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit_threadLabel">
+                    Edit Thread
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100 modal-form">
+                    <div class="mb-3">
+                        <label for="exampleInputText2" class="form-label">Subject</label>
+                        <div class="form-control" id="exampleInputText2">{{ template.subject }}</div>
+                    </div>
+                    <!-- ck editor start -->
+                    <div class="text-editor-wrapper">
+                        <div id="edit_toolbar-container"></div>
+
+                        <!-- This container will become the editable. -->
+                        <div id="edit_editor">
+                            <p></p>
+                        </div>
+                    </div>
+                    <!-- ck editor ended -->
+                    <span class="error-msg" id="edit_thread_error"></span>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn discard-btn" data-bs-dismiss="modal">
+                    Discard
+                </button>
+                <button type="button" class="btn save-btn" id="edit_thread_btn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Thread Modal -->
+<div class="modal fade add-new-sender-email-modal" id="delete_thread_modal" tabindex="-1"
+     aria-labelledby="delete_thread_modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete_thread_modalLabel">
+                    Delete Thread
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100 modal-form">
+                    <div class="my-3 mb-5">
+                        <h6>Are you sure you want to delete thread?</h6>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn discard-btn" data-bs-dismiss="modal">
+                    Discard
+                </button>
+                <button type="button" class="btn delete-btn mx-3" id="delete_thread_btn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} {% block javascript %}
+<script src="{% static 'js/templates/thread_list.js' %}"></script>
+{% endblock javascript %}

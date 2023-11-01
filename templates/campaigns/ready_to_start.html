@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}
+  Embermail | Ready-To-Start
+{% endblock title %} {% block content %}
+<!-- page header title section start -->
+<div class="em_inner_area">
+  <div class="em_inner_content">
+    <div class="start-component">
+      <h1>Ready to start?</h1>
+      <p>
+        It's easy to get started, add your first inbox. We support a large
+        number of inboxes and it takes less than a minute to connect them.
+      </p>
+      <div class="btn-row">
+        <a href="{% url 'campaigns:select_provider' %}?selected_flow=inbox" class="btn add-inbox-btn">Add Inbox</a>
+        <a href="{% url 'campaigns:select_provider' %}?selected_flow=invite" class="invite-people-btn">Invite People</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-img">
+    <img src="{% static '/images/Saly-17.png' %}" alt="bottom-emoji" />
+  </div>
+</div>
+<!-- page header title section ended -->
+
+{% endblock content %}

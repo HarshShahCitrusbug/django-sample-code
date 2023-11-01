@@ -1,0 +1,63 @@
+{% load static %}
+<tbody id="campaign_list_tbody">
+{% for campaign in campaigns %}
+<tr class="custom-row">
+    <td>
+        <div class="warmup-listing-info-wrapper">
+            {% if campaign.email_service_provider == 'gmail' %}
+            <img src="{% static '/images/Gmail-logo.svg' %}" alt="mail-icon"/>
+            {% else %}
+            <img src="{% static '/images/Outlook-logo.svg' %}" alt="mail-icon"/>
+            {% endif %}
+            <div class="warmup-listing-info">
+                <p class="warmup-listing-email ms-0">
+                    {{campaign.email}}
+                </p>
+                {% if user.is_master_user %}
+                <span class="text-muted">({{ campaign.campaign_owner }})</span>
+                {% endif %}
+            </div>
+        </div>
+    </td>
+    <td>
+        {% if campaign.campaign_status == 'Paused' %}
+        <span class="pause-status">Paused</span>
+        {% else %}
+        <span class="running-status">Running</span>
+        {% endif %}
+    </td>
+    <td>
+        <p>{{ campaign.updated_domain_type }}</p>
+    </td>
+    <td>
+        <p>2% (15)</p>
+    </td>
+    <td>
+        <p>98</p>
+    </td>
+    <td>
+        <p>{{campaign.plan_name}}</p>
+    </td>
+    <td>
+        <div class="d-flex align-items-center justify-content-center icon-row">
+            <a href="javascript:void(0)" title="Play-Pause" class="play_pause_button" id="{{campaign.id}}">
+                {% if campaign.campaign_status == 'Paused' %}
+                <img src="{% static '/images/play-icon.svg' %}" alt="play-icon"/>
+                {% else %}
+                <img src="{% static '/images/pause-icon.svg' %}" alt="play-icon"/>
+                {% endif %}
+            </a>
+            <a href="javascript:void(0)" title="Edit" class="edit_button" id="{{ campaign.id }}_edit">
+                <img src="{% static '/images/Edit-feild.svg' %}" alt="edit-icon"/>
+            </a>
+        </div>
+    </td>
+</tr>
+{% empty %}
+<tr class="custom-row">
+    <td colspan="7" class="text-center">
+        <p>No Data</p>
+    </td>
+</tr>
+{% endfor %}
+</tbody>

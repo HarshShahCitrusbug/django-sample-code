@@ -1,0 +1,34 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} Embermail | Email-Provider {% endblock title %}
+
+{% block content %}
+
+<!-- page header title section start -->
+<div class="em_inner_area">
+    <div class="em_inner_content">
+      <div class="select-provider-wrapper">
+        <h1>Select Provider</h1>
+        <p>
+          Praesent auctor viverra eleifend. Fusce efficitur ipsum a
+          risus vehicula.
+        </p>
+        <div class="select-provider-btn">
+          <a href="{% url 'campaigns:add_email' %}?selected_flow={{ selected_flow }}&email_provider=gmail" class="btn mail-provider-btn">
+            <img src="{% static '/images/Gmail-logo.svg' %}" alt="mail-logo" />
+            Connect with Gmail
+          </a>
+          <a href="{% url 'campaigns:add_email' %}?selected_flow={{ selected_flow }}&email_provider=outlook" class="btn outlook-provider-btn">
+            <img src="{% static '/images/Outlook-logo.svg' %}" alt="outlook-logo" />
+            Connect with outlook
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-img">
+      <img src="{% static '/images/Saly-17.png' %}" alt="bottom-emoji" />
+    </div>
+  </div>
+  <!-- page header title section ended -->
+
+  {% endblock content %}

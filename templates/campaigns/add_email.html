@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Warmup-Email {% endblock title %}
+
+{% block content %}
+<!-- page header title section start -->
+<div class="em_inner_area">
+    <div class="em_inner_content">
+        <div class="connect-inbox-wrapper">
+            <div class="connect-title">
+                {% if email_provider == 'gmail' %}
+                <img src="{% static '/images/Gmail-logo.svg' %}" alt="email-logo"/>
+                <h1>Connect Gmail account</h1>
+                {% else %}
+                <img src="{% static '/images/Outlook-logo.svg' %}" alt="email-logo"/>
+                <h1>Connect Outlook account</h1>
+                {% endif %}
+            </div>
+            <p>
+                Praesent auctor viverra eleifend. Fusce efficitur ipsum a
+                risus vehicula.
+            </p>
+
+            <div class="custom-form w-100">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Your email address"
+                           aria-describedby="emailHelp"/>
+                    <span class="error-msg" id="email_error"></span>
+                </div>
+                {% comment %} <button type="submit" class="btn submit-btn" id="email_submit_btn">Continue</button> {% endcomment %}
+                <div class="connect-gmail-btn-row mt-5 custom-btn-row">
+                    <a href="{% url 'campaigns:select_provider' %}?selected_flow={{ selected_flow }}" class="btn back-btn">Back</a>
+                    <a href="#" class="btn continue-btn" id="email_submit_btn">Continue</a>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-img">
+        <img src="{% static '/images/Saly-17.png' %}" alt="bottom-emoji"/>
+    </div>
+</div>
+<!-- page header title section ended -->
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'js/campaigns/add_email.js' %}"></script>
+{% endblock javascript %}

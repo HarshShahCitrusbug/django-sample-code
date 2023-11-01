@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | User Profile {% endblock title %}
+{% block content %}
+{% csrf_token %}
+<!-- page content section start -->
+<div class="em_inner_area has-settings-main-wrapper">
+    <div class="em_inner_content">
+        <div class="settings-main-wrapper">
+            <h1>Settings</h1>
+            <div class="setting-tab-section">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                aria-selected="true">
+                            Profile
+                        </button>
+                    </li>
+                    {% if user.is_master_user %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="{% url 'profiles:member_list' %}" >Members</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="{% url 'profiles:billing_section' %}" >Billing</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
+                         aria-labelledby="pills-profile-tab">
+                        <div class="profile-setting-wrapper">
+                            <h2>Profile Settings</h2>
+                            <form class="custom-form profile-setting-form row">
+                                <div class="form-group mb-3 col-lg-4">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" value="{{ user.first_name }}"
+                                           disabled/>
+                                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#name_modal"
+                                       class="edit-field-icon">
+                                        <img src="{% static '/images/Edit-feild.svg' %}" alt="edit-field-icon"/>
+                                    </a>
+                                </div>
+                                <div class="form-group mb-3 col-lg-4">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input class="form-control" id="email" value="{{ user.email }}" disabled/>
+                                </div>
+                                <div class="form-group mb-3 col-lg-4">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" value="***********"
+                                           disabled/>
+                                    <a href="javascript:;" class="edit-field-icon" data-bs-toggle="modal"
+                                       data-bs-target="#password_modal">
+                                        <img src="{% static '/images/Edit-feild.svg' %}" alt="edit-field-icon"/>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page header title section ended -->
+
+<!-- Edit Name field modal -->
+<div class="modal fade edit-field-modal" id="name_modal" tabindex="-1" aria-labelledby="name_modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="name_modalLabel">
+                    Update Name
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100">
+                    <div class="mb-3">
+                        <label for="name_input" class="form-label">Name</label>
+                        <input type="text" id="name_input" class="form-control" value="{{ user.first_name }}"/>
+                    </div>
+                    <span class="error-msg" id="name_modal_error"></span>
+                    <button type="button" class="btn submit-btn" id="name_modal_btn">
+                        Confirm Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal fade edit-field-modal" id="password_modal" tabindex="-1" aria-labelledby="password_modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="password_modalLabel">
+                    Change Password
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="custom-form w-100">
+                    <div class="mb-3 password-field">
+                        <label for="old_password_input" class="form-label">Current Password</label>
+                        <input type="password" id="old_password_input" class="form-control"/>
+                        <button type="button" id="btnToggle" class="toggle">
+                            <i id="eyeIcon" class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="mb-3 password-field">
+                        <label for="password_input" class="form-label">New Password</label>
+                        <input type="password" id="password_input" class="form-control"/>
+                        <button type="button" id="btnToggle1" class="toggle">
+                            <i id="eyeIcon1" class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="error-msg" id="password_modal_error"></span>
+                    <button type="button" class="btn submit-btn" id="password_modal_btn">
+                        Confirm Changes
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'js/profiles/user_profile.js' %}"></script>
+{% endblock javascript %}

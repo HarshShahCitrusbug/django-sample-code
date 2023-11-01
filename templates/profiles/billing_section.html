@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Billing Detail {% endblock title %}
+{% load misc_filters %}
+
+{% block content %}
+{% csrf_token %}
+<!-- page content section start -->
+<div class="em_inner_area has-settings-main-wrapper">
+    <div class="em_inner_content">
+        <div class="settings-main-wrapper">
+            <h1>Settings</h1>
+            <div class="setting-tab-section">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="{% url 'profiles:user_profile' %}">Profile</a>
+                    </li>
+                    {% if user.is_master_user %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="{% url 'profiles:member_list' %}">Members</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-billing-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-billing" type="button" role="tab" aria-controls="pills-billing"
+                                aria-selected="false">
+                            Billing
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-billing" role="tabpanel"
+                         aria-labelledby="pills-billing-tab">
+                        <div class="billing-tab-wrapper row">
+                            <div class="col-md-6">
+                                <div class="tab-block-wrapper">
+                                    <h2>Plans</h2>
+                                    <ul class="billing-plan-list">
+                                        {% for plan in plans %}
+                                        <li>
+                                            <div class="select-plan-item p-0">
+                                                {% if plan.name == 'Starter' %}
+                                                <img src="{% static '/images/starter.svg' %}" alt="plan-icon"/>
+                                                {% elif plan.name == 'Advanced' %}
+                                                <img src="{% static '/images/advanced.svg' %}" alt="plan-icon"/>
+                                                {% else %}
+                                                <img src="{% static '/images/pro.svg' %}" alt="plan-icon"/>
+                                                {% endif %}
+                                                <div class="plan-info">
+                                                    <h6>{{ plan.name }}</h6>
+                                                    <p class="mb-0">
+                                                        <span>${{ plan.plan_amount_per_month }}/month</span> {{ plan.description }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="email-count-text">
+                                                <p>
+                                                    {% if plan.total_campaign %}
+                                                    {{ plan.total_campaign }}
+                                                    {% if plan.total_campaign > 1 %}
+                                                    emails
+                                                    {% else %}
+                                                    email
+                                                    {% endif %}
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="tab-block-wrapper">
+                                    <h2>Payment Methods</h2>
+                                    {% for payment_method in payment_methods %}
+                                    <div class="payment-method-block">
+                                        <div class="payment-content">
+                                            <img src="{% static '/images/Frame.svg' %}" class="payment-method-img"
+                                                 alt="payment-img"/>
+                                            <p>{{ payment_method.card_brand }} Ending in {{ payment_method.card_last4 }}
+                                                & Expiry {{ payment_method.card_expiry_month }}/{{ payment_method.card_expiry_year }}</p>
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    <div class="payment-method-block">
+                                        <div class="payment-content">
+                                            <p>Not authorised to access this section.</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="tab-block-wrapper">
+                                    <div class="billing-history-wrapper">
+                                        <h2 class="mb-0">Billing History</h2>
+
+                                        <div class="right-side-search-btn">
+                                            <div class="row search-bar">
+                                                <div class="col-md-12 align-self-start">
+                                                    <div class="input-group">
+                                                        <input class="form-control border-end-0 border bg-custom-gray"
+                                                               type="search"
+                                                               placeholder="Search by Email, Invoice"
+                                                               id="search_input_billing_history"/>
+                                                        <span class="input-group-append">
+                                      <button class="btn bg-custom-gray border-start-0 border-bottom-0 ms-n5"
+                                              type="button">
+                                        <i class="fa fa-search"></i>
+                                      </button>
+                                    </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="javascript:void(0)" class="btn downlaod-all-btn upgrade-btn"
+                                               id="download_all_btn">Download
+                                                all</a>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive members-listing-table mt-2" id="invoice_table_div">
+                                        {% include 'profiles/billing_invoice_table.html' %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page header title section ended -->
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'js/profiles/billing_section.js' %}"></script>
+{% endblock javascript %}

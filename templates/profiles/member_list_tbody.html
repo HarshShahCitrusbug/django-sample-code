@@ -1,0 +1,37 @@
+{% load static %}
+<tbody id="member_list_tbody">
+{% for member in members %}
+<tr class="custom-row">
+    <td class="member-data">
+        <div class="member-info-wrapper">
+            <img src="{% static '/images/default-user.png' %}" alt="member-photo"/>
+            <div class="member-info">
+                <h2>{{ member.email }}</h2>
+                <p>{% if member.first_name %}{{ member.first_name }}{% endif %}</p>
+            </div>
+        </div>
+    </td>
+    <td>
+        <span class="{% if member.status != 'Active' %}red-text{% else %}active-status{% endif %}">{{ member.status }}</span>
+    </td>
+    <td>
+        <div class="plan-status">
+            <span>{{ member.name }}</span>
+        </div>
+    </td>
+    <td>
+        <span class="nex-invoice-date">{{ member.next_invoice_date | date:"M d, Y" }}</span>
+    </td>
+    <td>
+        <a href="javascript:void(0)" class="forward-arrow member_list_arrow" id="{{ member.id }}"><i
+                class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </td>
+</tr>
+{% empty %}
+<tr class="custom-row">
+    <td colspan="5" class="member-data text-center">
+        Sorry, no members found.
+    </td>
+</tr>
+{% endfor %}
+</tbody>

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Plan Selection {% endblock title %}
+{% block content %}
+
+{% csrf_token %}
+<!-- page header title section start -->
+<div class="em_inner_area">
+    <div class="em_inner_content">
+        <div class="connect-gmail-box-wrapper">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="connect-content-left-wrapper select-plan-wrapper">
+                        <div class="connect-title">
+                            <img src="{% static '/images/M-logo.svg' %}" alt="email-logo"/>
+                            <h1>Select Plan</h1>
+                        </div>
+                        <h4>
+                            EmberMail.ai offers a flexible, tiered pricing structure
+                            depending on the time commitment:
+                        </h4>
+                        <div class="select-plan-list">
+                            <ul class="ps-0">
+                                {% for plan in plans %}
+                                <li class="select-plan-item-block plan_list_items">
+                                    <input id="{{ plan.id }}" class="radio-custom" name="plan-list" type="radio"/>
+                                    <label for="{{ plan.id }}" class="radio-custom-label">
+                                        <div class="select-plan-item">
+                                            {% if plan.name == 'Starter' %}
+                                            <img src="{% static '/images/starter.svg' %}" alt="plan-icon"/>
+                                            <div class="plan-info">
+                                                <h6>Starter</h6>
+                                                <p class="mb-0">
+                                                    <span>$40/month</span> per inbox for a
+                                                    monthly commitment.
+                                                </p>
+                                            </div>
+                                            {% elif plan.name == 'Advanced' %}
+                                            <img src="{% static '/images/advanced.svg' %}" alt="plan-icon"/>
+                                            <div class="plan-info">
+                                                <h6>Advanced<span>Save 12.5%</span></h6>
+                                                <p class="mb-0">
+                                                    <span>$35/month</span> per inbox for a
+                                                    quarterly commitment.
+                                                </p>
+                                            </div>
+                                            {% elif plan.name == 'Pro' %}
+                                            <img src="{% static '/images/pro.svg' %}" alt="plan-icon"/>
+                                            <div class="plan-info">
+                                                <h6>Pro <span>Save 50%</span></h6>
+                                                <p class="mb-0">
+                                                    <span>$20/month</span> per inbox for a
+                                                    annual commitment.
+                                                </p>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </label>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <span class="error-msg" id="plan_selection_error"></span>
+                        <div class="connect-gmail-btn-row">
+                            <a  class="btn back-btn d-none">Back</a>
+                            <a  class="btn continue-btn" id="plan_selection_continue_btn">Continue</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="activate-info-sidebar-wrapper">
+                        <ul class="progress">
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Enable IMAP</p>
+                            </li>
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Security</p>
+                            </li>
+                            <li class="progress__item progress__item--active">
+                                <p class="progress__title">Select Plan</p>
+                            </li>
+                            <li class="progress__item">
+                                <p class="progress__title">Pay</p>
+                            </li>
+                            <li class="progress__item">
+                                <p class="progress__title">Schedule</p>
+                            </li>
+                        </ul>
+
+                        <div class="message-sent-wrapper">
+                            <img src="{% static '/images/message.svg' %}" alt="mesage-icon"/>
+                            <h6>having trouble?</h6>
+                            <p>
+                                feel free to contact us and we will always help you
+                                through the process
+                            </p>
+                            <a href="{% url 'users:contact' %}" class="btn contactus-btn">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-img">
+        <img src="{% static '/images/Saly-17.png' %}" alt="bottom-emoji"/>
+    </div>
+</div>
+<!-- page header title section ended -->
+
+{% endblock content %}
+
+{% block javascript %}
+<script src="{% static 'js/payment/plan_selection.js' %}"></script>
+{% endblock javascript %}

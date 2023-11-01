@@ -1,0 +1,17 @@
+{% load static %}
+<div id="login_password_div">
+    <div class="my-3 mb-0 password-field">
+        <label class="form-label" for="login_password">Password</label>
+        <input class="form-control" id="login_password" placeholder="Password" type="password">
+        <button class="toggle" id="btnToggle" type="button"><i class="fa fa-eye" id="eyeIcon"></i></button>
+
+    </div>
+     <span class="error-msg" id="password_error"></span>
+
+    <div class="forgot-password-link mt-1">
+        <a href="{% url 'users:password_reset' %}">Forgot password?</a>
+    </div>
+    <button class="btn submit-btn" id="login_btn">Login with email</button>
+
+    <script src="{% static 'js/users/onboarding_login.js' %}"></script>
+</div>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <h2>Your email verification completed successfully.</h2>
+    <hr>
+    You can login here : <h4><a calss="btn btn-success btn-sm" href="{% url 'users:onboarding' %}">Login</a></h4>
+
+</div>
+{% endblock content %}
+
+
+{% block javascript %}
+<script src="{% static 'js/users/onboarding.js' %}"></script>
+{% endblock javascript %}

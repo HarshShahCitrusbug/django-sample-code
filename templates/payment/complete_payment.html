@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Embermail | Payment {% endblock title %}
+{% block content %}
+<!-- page header title section start -->
+<div class="em_inner_area">
+    <div class="em_inner_content">
+        <div class="connect-gmail-box-wrapper">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="connect-content-left-wrapper complete-payment-wrapper">
+                        <div class="connect-title">
+                            <img src="{% static '/images/M-logo.svg' %}" alt="email-logo"/>
+                            <h1>Complete Payment</h1>
+                        </div>
+                        <h4>
+                            EmberMail.ai offers a flexible, tiered pricing structure
+                            depending on the time commitment:
+                        </h4>
+                        <div class="select-plan-item display-plan-info mt-2">
+                            {% if plan.name == 'Advanced' %}
+                            <img src="{% static '/images/advanced.svg' %}" alt="plan-icon"/>
+                            <div class="plan-info">
+                                <h6>{{ plan.name }}<span>Save 12.5%</span></h6>
+                                <p class="mb-0">
+                                    <span>$35/month </span>{{ plan.description }}
+                                </p>
+                            </div>
+                            {% elif plan.name == 'Pro' %}
+                            <img src="{% static '/images/pro.svg' %}" alt="plan-icon"/>
+                            <div class="plan-info">
+                                <h6>{{ plan.name }}<span>Save 50%</span></h6>
+                                <p class="mb-0">
+                                    <span>$20/month </span>{{ plan.description }}
+                                </p>
+                            </div>
+                            {% else %}
+                            <img src="{% static '/images/starter.svg' %}" alt="plan-icon"/>
+                            <div class="plan-info">
+                                <h6>{{ plan.name }}</h6>
+                                <p class="mb-0">
+                                    <span>$40/month </span>{{ plan.description }}
+                                </p>
+                            </div>
+                            {% endif %}
+                            <a href="{% url 'payment:plan_selection' %}" class="btn change-plan-link">Change Plan</a>
+                        </div>
+
+                        <div class="row g-3 payment-form custom-form w-100">
+                            <div>
+                                <span class="error-msg" id="common_error"></span>
+                            </div>
+                            {% csrf_token %}
+                            <div class="col-lg-6 col-md-12">
+                                <div class="mb-3">
+                                    <label for="full_name" class="form-label">Full name or company name</label>
+                                    <input type="text" class="form-control" id="full_name"/>
+                                    <span class='error-msg' id="full_name_error"></span>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="city"/>
+                                        <span class='error-msg' id="city_error"></span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <label for="zip" class="form-label">Zip</label>
+                                        <input type="text" class="form-control" id="zip"/>
+                                        <span class='error-msg' id="zip_error"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="dropdown custom-dropdown country-dropdown">
+                                        <label for="country">
+                                            Country
+                                        </label>
+                                        <input list="country_list" id="country" class="dropdown__switch form-control"
+                                               name="Country">
+                                        <datalist class="dropdown__filter dropdown__select" id="country_list">
+                                            {% for country in country_list %}
+                                            <option class="dropdown__select-option" value="{{ country.Name }}">
+                                                {{ country.Code }}
+                                            </option>
+                                            {% endfor %}
+                                        </datalist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12" id="payment-stripe">
+                                <div class="mb-3">
+                                    <div class="form-group">
+                                        <label for="card_number_div" class="form-label">Card Number</label>
+                                        <div class="credit-card-number form-control" id="card_number_div">
+                                        </div>
+                                        <span class="error-msg" id="card_number_error"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <label for="card_expiry_div" class="form-label">Expiry Date</label>
+                                        <div class="form-group form-control" id="card_expiry_div">
+                                        </div>
+                                        <span class="error-msg" id="card_expiry_error"></span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <label for="card_cvc_div" class="form-label">CVV</label>
+                                        <div class="form-group form-control" id="card_cvc_div">
+                                        </div>
+                                        <span class="error-msg" id="card_cvv_error"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-none">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="gridCheck"/>
+                                        <label class="form-check-label" for="gridCheck">
+                                            I’ve Promo code
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <ul class="total-list-content">
+                                        <li>
+                                            <h6>Subtotal</h6>
+                                            <span>${{ plan.plan_amount }}</span>
+                                        </li>
+                                        <li>
+                                            <h6>Vat</h6>
+                                            <span>$0</span>
+                                        </li>
+                                        <li class="total-final-list">
+                                            <h6>Total</h6>
+                                            <span>${{ plan.plan_amount }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="mb-0">
+                                    <button type="submit" class="btn submit-btn" id="validate">
+                                        Make Payment
+                                    </button>
+                                </div>
+                                <div class="secured-by-text">
+                                    <p>Secured by</p>
+                                    <img src="{% static '/images/stripe.png' %}" class="stripe-img" alt="stripe-img"/>
+                                    <img src="{% static '/images/stripe-icon.png' %}" class="stripe-icon"
+                                         alt="stripe-icon"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="activate-info-sidebar-wrapper">
+                        <ul class="progress">
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Enable IMAP</p>
+                            </li>
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Security</p>
+                            </li>
+                            <li class="progress__item progress__item--completed is-done">
+                                <p class="progress__title">Select Plan</p>
+                            </li>
+                            <li class="progress__item progress__item--active">
+                                <p class="progress__title">Payment</p>
+                            </li>
+                            <li class="progress__item">
+                                <p class="progress__title">Schedule</p>
+                            </li>
+                        </ul>
+
+                        <div class="message-sent-wrapper">
+                            <img src="{% static '/images/message.svg' %}" alt="mesage-icon"/>
+                            <h6>having trouble?</h6>
+                            <p>
+                                feel free to contact us and we will always help you
+                                through the process
+                            </p>
+                            <a href="{% url 'users:contact' %}" class="btn contactus-btn">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-img">
+        <img src="{% static '/images/Saly-17.png' %}" alt="bottom-emoji"/>
+    </div>
+</div>
+<!-- page header title section ended -->
+{% endblock content %}
+
+{% block javascript %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.3.2/jquery.payment.min.js"></script>
+<script src="{% static 'js/payment/complete_payment.js' %}"></script>
+{% endblock javascript %}

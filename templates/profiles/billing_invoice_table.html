@@ -1,0 +1,58 @@
+{% load static %}
+{% load misc_filters %}
+<table class="table w-100 table-borderless custom-table members-table biling-history-table" id="invoice_table">
+    <thead>
+    <tr>
+        <th>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value=""
+                       id="select_all_invoices"/>
+                <label class="form-check-label" for="select_all_invoices">
+                    Invoice
+                </label>
+            </div>
+        </th>
+        <th>Email</th>
+        <th>Billing Date</th>
+        <th>Amount</th>
+        <th>Payment Status</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="payment_history_tbody">
+    {% for invoice in invoices %}
+    <tr>
+        <td>
+            <div class="form-check">
+                <input class="form-check-input all_download_checkboxes" type="checkbox"
+                       value="{{ invoice.invoice_download_url }}"
+                       id="flexCheckDefault{{ forloop.counter }}"/>
+                <label class="form-check-label" for="flexCheckDefault{{ forloop.counter }}">
+                    <div class="billing-invoice">
+                        <img src="{% static '/images/Icon-3.svg' %}" alt=""/>
+                        <p>{{ invoice.invoice_name }}</p>
+                    </div>
+                </label>
+            </div>
+        </td>
+        <td>{{ invoice.warmup_email }}</td>
+        <td>{{ invoice.invoice_date | timestamp_to_datetime | date:"d-m-y" }}</td>
+        <td>USD $ {{ invoice.plan_price | divide:100 | floatformat:2 }}</td>
+        {% if invoice.payment_status == 'success' %}
+        <td class="text-success">{{ invoice.payment_status }}</td>
+        {% else %}
+        <td class="text-danger">{{ invoice.payment_status }}</td>
+        {% endif %}
+        <td>
+            <a href="{{ invoice.invoice_download_url }}" class="btn download-history-btn">Download</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr class="custom-row">
+        <td colspan="6" class="text-center">
+            <p>No Data</p>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

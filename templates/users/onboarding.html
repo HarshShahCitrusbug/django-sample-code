@@ -1,0 +1,91 @@
+{% extends 'onboarding_base.html' %}
+{% load static %}
+{% block title %}<title>Embermail | Onboarding</title>
+{% endblock title %}
+
+{% block content %}
+
+<!-- Middle section start -->
+<main class="flex-shrink-0 middle-section">
+    <div class="middle-inner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 d-flex">
+                    <div class="signup-block">
+                        <h1>Welcome to Embermail</h1>
+                        <p>
+                            Praesent auctor viverra eleifend. Fusce efficitur ipsum a
+                            risus vehicula.
+                        </p>
+                        <!--                        <form class="custom-form w-100">-->
+                        <div class="custom-form w-100">
+                            <div class="invalid-password-alert-box d-none" id="common_error_div">
+                                <img alt="" src="{% static 'images/CloseCircle.svg' %}">
+                                <p id="common_error"></p>
+                            </div>
+                            {% csrf_token %}
+                            <div class="mb-3" id="onboarding_box">
+                                <label class="form-label" for="email"
+                                >Email address</label
+                                >
+                                {% if email %}
+                                <div class="form-control" id="email">{{email}}</div>
+                                {% else %}
+                                <input
+                                        aria-describedby="emailHelp"
+                                        class="form-control"
+                                        id="email"
+                                        placeholder="Your email address"
+                                        type="email"
+                                />
+                                {% endif %}
+                                <span class="error-msg" id="email_error"></span>
+                            </div>
+                            <button class="btn submit-btn" id="email_submit_btn">
+                                Continue with email
+                            </button>
+                        </div>
+                        <!--                        </form>-->
+                        <div class="info-text">
+                            <p>
+                                By continuing, you agree to the
+                                <a href="javascript:void(0)">Terms of use,</a> and
+                                <a href="javascript:void(0)">Privacy Policy</a> of
+                                Embermail.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 p-0 bg-orange">
+                    <div class="right-block-wrapper">
+                        <img
+                                alt="saly-img"
+                                class="emoji"
+                                src="{% static 'images/Saly.png' %}"
+                        />
+                        <div class="right-block-content">
+                            <h2>
+                                Seamless <br/>
+                                Email Warming
+                            </h2>
+                            <p>
+                                Praesent auctor viverra eleifend. Fusce efficitur ipsum a
+                                risus vehicula.
+                            </p>
+                            <a class="link-tag" href="javascript:void(0)">
+                                <img alt="" src="{% static 'images/play-circle.svg' %}"/>
+                                <span>Learn how Embermail works</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Middle section ended -->
+
+{% endblock content %}
+{% block javascript %}
+<script src="{% static 'js/users/onboarding.js' %}"></script>
+{% endblock javascript %}

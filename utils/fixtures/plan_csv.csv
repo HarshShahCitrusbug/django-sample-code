@@ -1,0 +1,4 @@
+name,description,plan_amount,plan_duration,stripe_price_id,stripe_product_id
+Starter,per inbox for a monthly commitment.,40,1,price_1NhQS6CWIhbNpIvgQWbGqkT8,prod_OUPGskaMoWZZ7E
+Advanced,per inbox for a quarterly commitment.,105,3,price_1NTj9vCWIhbNpIvgxa5V9dFg,prod_OGFfFoLFikY1ne
+Pro,per inbox for a annual commitment.,240,12,price_1NTjABCWIhbNpIvgUX4rMMxY,prod_OGFfygOVa9CTSM
